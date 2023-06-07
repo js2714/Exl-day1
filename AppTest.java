@@ -1,4 +1,4 @@
-package com.demo.Selenium1;
+package com.day6.Day8;
 
 import static org.junit.Assert.assertTrue;
 
