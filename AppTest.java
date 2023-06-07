@@ -1,4 +1,4 @@
-package com.day6.Day8;
+package com.day6.Day7;
 
 import static org.junit.Assert.assertTrue;
 
