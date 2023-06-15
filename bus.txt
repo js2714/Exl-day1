@@ -1,0 +1,51 @@
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AbhibusTest {
+    public static void main(String[] args) {
+        // Set the path to your chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // Launch the Chrome browser
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the abhibus.com website
+        driver.get("https://www.abhibus.com/");
+
+        // Find and click on the "Bus" element
+        WebElement busElement = driver.findElement(By.xpath("//a[contains(@href, 'bus-tickets')]"));
+        busElement.click();
+
+        // Find and enter the "Leaving From" location
+        WebElement leavingFromInput = driver.findElement(By.id("source"));
+        leavingFromInput.sendKeys("Hyderabad");
+
+        // Find and enter the "Going To" location
+        WebElement goingToInput = driver.findElement(By.id("destination"));
+        goingToInput.sendKeys("Bangalore");
+
+        // Find and enter the date
+        WebElement dateInput = driver.findElement(By.id("datepicker1"));
+        dateInput.sendKeys("2023-06-30");
+
+        // Find and click on the "Search" button
+        WebElement searchButton = driver.findElement(By.xpath("//button[contains(@class, 'search-btn')]"));
+        searchButton.click();
+
+        // Wait for the search results to load
+        // You can use explicit wait or implicit wait here as per your preference
+
+        // Assert the search result
+        WebElement searchResult = driver.findElement(By.xpath("//div[contains(@class, 'search_results')]"));
+        String searchResultText = searchResult.getText();
+        System.out.println("Search Result: " + searchResultText);
+
+        // Close the browser
+        driver.quit();
+    }
+}

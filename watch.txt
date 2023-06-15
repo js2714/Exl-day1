@@ -1,0 +1,29 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ShopperStopTest {
+    public static void main(String[] args) {
+        // Set the path to your chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // Launch the Chrome browser
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the shopperstop.com website
+        driver.get("https://www.shopperstop.com/");
+
+        // Verify the total number of watches using a specific XPath
+        WebElement watchesCountElement = driver.findElement(By.xpath("//a[contains(@href, 'watches')]/span"));
+        String watchesCount = watchesCountElement.getText();
+        System.out.println("Total number of watches: " + watchesCount);
+
+        // Verify if the page is visible
+        boolean isPageVisible = driver.findElement(By.tagName("body")).isDisplayed();
+        System.out.println("Is the page visible? " + isPageVisible);
+
+        // Close the browser
+        driver.quit();
+    }
+}

@@ -1,0 +1,48 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DemoWebShopTest {
+    public static void main(String[] args) {
+        // Path to your chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // Launch the Chrome browser
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the website
+        driver.get("https://demowebshop.tricentis.com/");
+
+        // Find the search input field and enter the search query
+        WebElement searchInput = driver.findElement(By.id("small-searchterms"));
+        searchInput.sendKeys("gift");
+        searchInput.sendKeys(Keys.RETURN);
+
+        // Wait for the search results to load
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        // Find the sort dropdown and select "Price: High to Low" option
+        WebElement sortDropdown = driver.findElement(By.id("products-orderby"));
+        sortDropdown.sendKeys(Keys.ARROW_DOWN);
+        sortDropdown.sendKeys(Keys.RETURN);
+
+        // Wait for the search results to reload with the sorted order
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        // Find the search results
+        List<WebElement> searchResults = driver.findElements(By.className("product-item"));
+
+        // Print the search results
+        System.out.println("Search Results (Price: High to Low):");
+        for (WebElement result : searchResults) {
+            String productName = result.findElement(By.className("product-title")).getText();
+            String productPrice = result.findElement(By.className("price")).getText();
+            System.out.println("Name: " + productName + " - Price: " + productPrice);
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
